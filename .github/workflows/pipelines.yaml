@@ -45,10 +45,8 @@ jobs:
         run: |-
           gcloud --quiet auth configure-docker
 
-      - name: Set up GKE and Authenticate
+      - name: Get GKE Credentials
         run: |-
-          gcloud auth activate-service-account --key-file=${{ secrets.GKE_SA_KEY }}
-          gcloud config set project ${{ secrets.GKE_PROJECT }}
           gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
 
       - name: Build Docker Image
